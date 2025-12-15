@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiMoon, FiVideo, FiCalendar, FiMessageSquare, FiActivity } from "react-icons/fi";
 import { FaHeartbeat, FaBone, FaPills, FaBaby, FaEye, FaStethoscope } from "react-icons/fa";
+
 const PALETTES = {
   light: {
     bgPrimary: "#faf5ff",    // Very pale purple bg
@@ -131,7 +132,7 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="navbar-nav" style={{ backgroundColor: isDarkMode ? theme.accent : 'transparent', border: 'none' }} />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="mx-auto" style={{ fontWeight: "600" }}>
-            {['Home', 'Services', 'Doctors'].map((item) => (
+            {['Home', 'Services', 'Therapists'].map((item) => (
                <Nav.Link as={NavLink} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} key={item} style={{ color: theme.textMain, margin: '0 10px' }}>
                  {item}
                </Nav.Link>
@@ -195,15 +196,15 @@ const Home = () => {
           <Row className="align-items-center" style={{ position: 'relative', zIndex: 1 }}>
             <Col md={6} className="pb-5">
               <motion.h1 variants={fadeUp} style={{ fontSize: "clamp(3rem, 8vw, 5.5rem)", fontWeight: "800", lineHeight: "1.1", marginBottom: "1.5rem" }}>
-                Future of <br />
-                <span style={{ color: theme.accent, textShadow: theme.cardGlow }}>Healthcare</span>
+                Restore Your <br />
+                <span style={{ color: theme.accent, textShadow: theme.cardGlow }}>Movement</span>
               </motion.h1>
               <motion.p variants={fadeUp} style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "500px", marginBottom: "2.5rem" }}>
-                  Experience smart, accessible, and personalized medicine. Your journey to better health starts here.
+                  Expert physical therapy and rehabilitation. Regain your strength, mobility, and freedom with our personalized care plans.
               </motion.p>
               <motion.div variants={fadeUp} className="d-flex gap-3">
-                <StyledButton as={Link} to="/book">Book Now →</StyledButton>
-                <StyledButton variant="outline" as={Link} to="/services">Learn More</StyledButton>
+                <StyledButton as={Link} to="/book">Book Session →</StyledButton>
+                <StyledButton variant="outline" as={Link} to="/services">Our Therapies</StyledButton>
               </motion.div>
             </Col>
           </Row>
@@ -215,10 +216,10 @@ const Home = () => {
         <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <Row className="g-4">
             {[
-              { title: "Instant Video Consult", icon: <FiVideo />, color: "#a855f7", link: "/book" },
-              { title: "Schedule Appointment", icon: <FiCalendar />, color: "#ec4899", link: "/book" },
-              { title: "Live Chat Support", icon: <FiMessageSquare />, color: "#3b82f6", link: "/contact" },
-              { title: "Health Tracking", icon: <FiActivity />, color: "#14b8a6", desc: "Coming Soon", link: "#" }
+              { title: "Virtual Assessment", icon: <FiVideo />, color: "#a855f7", link: "/book" },
+              { title: "Book Therapy", icon: <FiCalendar />, color: "#ec4899", link: "/book" },
+              { title: "Chat with PT", icon: <FiMessageSquare />, color: "#3b82f6", link: "/contact" },
+              { title: "Recovery Tracker", icon: <FiActivity />, color: "#14b8a6", link: "#" }
             ].map((item, idx) => (
               <Col md={3} sm={6} key={idx}>
                 <Link to={item.link} style={{ textDecoration: 'none' }}>
@@ -296,12 +297,12 @@ const Book = () => {
       <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{duration: 0.5}}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
            <h2 style={{ fontWeight: "800", fontSize: "2.5rem" }}>
-             Book Your <span style={{ color: theme.accent }}>Session</span>
+             Start Your <span style={{ color: theme.accent }}>Recovery</span>
            </h2>
-           <p style={{ color: theme.textMuted }}>Instant confirmation. Flexible scheduling.</p>
+           <p style={{ color: theme.textMuted }}>Book your assessment or therapy session.</p>
         </div>
 
-        <Card style={{ ...glassCard, padding: "2rem", borderRadius: "30px" }}>
+        <Card style={{ ...glassCard, padding: "2rem", borderRadius: "30px", marginBottom: "3rem" }}>
           <AnimatePresence mode="wait">
           {!submitted ? (
             <motion.div key="form" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
@@ -321,11 +322,12 @@ const Book = () => {
                 </Col>
                 <Col md={12}>
                   <Form.Group>
-                    <Form.Label style={{fontWeight: '700'}}>Specialization</Form.Label>
+                    <Form.Label style={{fontWeight: '700'}}>Type of Therapy</Form.Label>
                     <Form.Select style={formStyle} onFocus={(e) => e.target.style.borderColor = theme.accent} onBlur={(e) => e.target.style.borderColor = isDarkMode ? 'transparent' : theme.border}>
-                      <option>Cardiology</option>
-                      <option>General Medicine</option>
-                      <option>Neurology</option>
+                      <option>Initial Assessment</option>
+                      <option>Sports Massage</option>
+                      <option>Post-Op Rehab</option>
+                      <option>Manual Therapy</option>
                     </Form.Select>
                   </Form.Group>
                 </Col>
@@ -359,6 +361,32 @@ const Book = () => {
           )}
           </AnimatePresence>
         </Card>
+
+        {/* --- NEW CONTACT SECTION ADDED HERE --- */}
+        <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 0.3 }}
+            className="text-center pt-4"
+        >
+            <h5 style={{ fontWeight: "800", color: theme.accent, marginBottom: "1.5rem", letterSpacing: "1px" }}>CONTACT OUR BRANCHES</h5>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ fontSize: '1.1rem', color: theme.textMain }}>
+                    <span style={{ fontWeight: '700', marginRight: '10px' }}>Dokki :</span> 
+                    <span style={{ opacity: 0.8 }}>+1 (555) 123-4567</span>
+                </div>
+                <div style={{ fontSize: '1.1rem', color: theme.textMain }}>
+                    <span style={{ fontWeight: '700', marginRight: '10px' }}>Heliopolis :</span> 
+                    <span style={{ opacity: 0.8 }}>+1 (555) 888-9999</span>
+                </div>
+                <div style={{ fontSize: '1.1rem', color: theme.textMain }}>
+                    <span style={{ fontWeight: '700', marginRight: '10px' }}>Nasr City :</span> 
+                    <span style={{ opacity: 0.8 }}>+1 (555) 444-2222</span>
+                </div>
+            </div>
+        </motion.div>
+        {/* -------------------------------------- */}
+
       </motion.div>
     </Container>
   );
@@ -368,55 +396,55 @@ const Services = () => {
   const { theme, isDarkMode } = useTheme();
     const serviceList =  [ {
     id: "01",
-    title: "Cardiology",
-    icon: <FaHeartbeat />,
-    text: "Comprehensive heart care including diagnosis, treatment, and prevention of cardiovascular diseases by experienced specialists."
+    title: "Sports Rehab",
+    icon: <FiActivity />,
+    text: "Targeted recovery programs for athletes to heal injuries, improve performance, and prevent future setbacks."
   },
   {
     id: "02",
-    title: "Orthopedics",
+    title: "Orthopedic Therapy",
     icon: <FaBone />,
-    text: "Advanced care for bones, joints, muscles, and spine conditions, helping patients regain mobility and reduce pain."
+    text: "Advanced care for bone, joint, and muscle conditions including back pain, arthritis, and fractures."
   },
   {
     id: "03",
-    title: "Gastroenterology",
+    title: "Post-Op Recovery",
     icon: <FaPills />,
-    text: "Expert diagnosis and treatment of digestive system disorders, including stomach, liver, and intestinal conditions."
+    text: "Specialized rehabilitation protocols to restore mobility and strength following surgical procedures."
   },
   {
     id: "04",
-    title: "Pediatrics",
+    title: "Pediatric PT",
     icon: <FaBaby />,
-    text: "Specialized healthcare services for infants, children, and adolescents, ensuring healthy growth and development."
+    text: "Gentle, play-based therapy for infants and children to support developmental milestones and motor skills."
   },
   {
     id: "05",
-    title: "Ophthalmology",
-    icon: <FaEye />,
-    text: "Complete eye care services including vision exams, eye disease treatment, and advanced diagnostic procedures."
+    title: "Cardiac Rehab",
+    icon: <FaHeartbeat />,
+    text: "Monitored exercise and education to help patients recover and improve health after heart conditions."
   },
   {
     id: "06",
-    title: "Pulmonology",
+    title: "Geriatric Care",
     icon: <FaStethoscope />,
-    text: "Diagnosis and management of lung and respiratory conditions such as asthma, bronchitis, and chronic breathing disorders."
+    text: "Focused therapies to improve balance, reduce fall risk, and maintain independence for older adults."
   },
 ];
-   
+    
 
   return (
     <Container className="py-5">
       <Row className="mb-5 align-items-center">
         <Col md={8}>
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-             <h6 style={{ color: theme.accent, letterSpacing: '2px', fontWeight: 'bold', textTransform: 'uppercase' }}>Our Services</h6>
+             <h6 style={{ color: theme.accent, letterSpacing: '2px', fontWeight: 'bold', textTransform: 'uppercase' }}>Our Expertise</h6>
              <h2 style={{ fontWeight: "900", fontSize: "3rem", lineHeight: "1.2" }}>
-                Medical specialities <br /> available in Hospital
+               Physical Therapy <br /> & Rehabilitation
              </h2>
           </motion.div>
         </Col>
-      
+       
       </Row>
 
       <motion.div variants={staggerContainer} initial="hidden" animate="visible">
@@ -454,7 +482,7 @@ const Services = () => {
                       borderBottom: "2px solid #ef4444",
                       paddingBottom: "2px"
                     }}>
-                      LEARN MORE
+                      BOOK SESSION
                     </Link>
                   </div>
                 </Card>
@@ -508,9 +536,9 @@ const Login = () => {
 const Doctors = () => {
   const { theme, isDarkMode } = useTheme();
   const doctors = [
-    { name: "Dr. Helena Vance", spec: "Neurologist", price: "$180", img: "👩‍⚕️" },
-    { name: "Dr. Amir Fayed", spec: "Cardiologist", price: "$150", img: "👨‍⚕️" },
-    { name: "Dr. Sarah Lee", spec: "Psychiatrist", price: "$200", img: "👩‍⚕️" },
+    { name: "Dr. Helena Vance", spec: "Senior Physiotherapist", price: "$120", img: "👩‍⚕️" },
+    { name: "Dr. Amir Fayed", spec: "Sports Therapist", price: "$100", img: "👨‍⚕️" },
+    { name: "Dr. Sarah Lee", spec: "Manual Therapist", price: "$110", img: "👩‍⚕️" },
   ];
 
 const cardStyle = isDarkMode
@@ -523,12 +551,12 @@ const cardStyle = isDarkMode
       backgroundColor: theme.bgSecondary,
       border: "none",
       boxShadow: theme.cardGlow,
-      color: "#111827",           
+      color: "#111827",            
     };
   return (
     <Container className="my-5">
         <motion.div initial={{opacity:0, y:-20}} animate={{opacity:1, y:0}} className="text-center mb-5">
-         <h2 style={{ fontWeight: "800", fontSize: "2.5rem" }}>World-Class <span style={{color: theme.accent}}>Experts</span></h2>
+         <h2 style={{ fontWeight: "800", fontSize: "2.5rem" }}>Expert <span style={{color: theme.accent}}>Therapists</span></h2>
       </motion.div>
       <motion.div variants={staggerContainer} initial="hidden" animate="visible">
         <Row>
@@ -539,8 +567,8 @@ const cardStyle = isDarkMode
                   <motion.div whileHover={{ rotate: [0, 10, -10, 0], scale: 1.1 }} style={{ fontSize: '4rem', marginBottom: '1rem' }}>{d.img}</motion.div>
                   <h4 style={{ fontWeight: "800" }}>{d.name}</h4>
                   <p style={{ color: theme.accent, fontWeight: "600" }}>{d.spec}</p>
-                  <h5 style={{ color: theme.textMuted, fontWeight: "700", margin: '1rem 0' }}>{d.price} <small>/ visit</small></h5>
-                  <StyledButton as={Link} to="/book" variant="outline" className="mt-auto w-100">Book now</StyledButton>
+                  <h5 style={{ color: theme.textMuted, fontWeight: "700", margin: '1rem 0' }}>{d.price} <small>/ session</small></h5>
+                  <StyledButton as={Link} to="/book" variant="outline" className="mt-auto w-100">Book Session</StyledButton>
                 </Card>
               </motion.div>
             </Col>
@@ -556,7 +584,7 @@ const Footer = () => {
     <footer style={{ backgroundColor: theme.bgSecondary, padding: "3rem 0", marginTop: "auto", textAlign: "center", borderTop: `1px solid ${theme.border}`, transition: "background-color 0.4s ease" }}>
       <Container>
         <h4 style={{ fontWeight: "900", letterSpacing: '-1px' }}><span style={{ color: theme.accent }}>⚡</span> HEALIX</h4>
-        <p style={{ opacity: 0.6 }}>The future of digital medicine.</p>
+        <p style={{ opacity: 0.6 }}>Professional Physical Therapy & Rehabilitation.</p>
       </Container>
     </footer>
   );
@@ -572,7 +600,7 @@ export default function App() {
             <Route path="/services" element={<Services />} /> 
             <Route path="/book" element={<Book />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/therapists" element={<Doctors />} />
           </Routes>
         </AnimatePresence>
         <Footer />
